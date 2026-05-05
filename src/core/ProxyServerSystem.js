@@ -250,20 +250,8 @@ class ProxyServerSystem extends EventEmitter {
             this.requestHandler.processOpenAIResponseRequest(req, res);
         });
 
-        app.post("/v1/responses/input_tokens", (req, res) => {
-            this.requestHandler.processOpenAIResponseInputTokens(req, res);
-        });
-
-        app.post("/responses/input_tokens", (req, res) => {
-            this.requestHandler.processOpenAIResponseInputTokens(req, res);
-        });
-
         app.post("/v1/messages", (req, res) => {
             this.requestHandler.processClaudeRequest(req, res);
-        });
-
-        app.post("/v1/messages/count_tokens", (req, res) => {
-            this.requestHandler.processClaudeCountTokens(req, res);
         });
 
         // Browser-session WebSocket downgrade / missing headers handler.

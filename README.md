@@ -169,7 +169,6 @@ services:
 - `GET /v1/models`：列出模型。
 - `POST /v1/chat/completions`：聊天补全和图片生成，支持非流式、真流式和假流式。
 - `POST /v1/responses`：OpenAI Responses API 兼容接口，用于对话生成，不支持图像生成，支持非流式、真流式和假流式。
-- `POST /v1/responses/input_tokens`：计算 OpenAI Responses API 请求的输入 token 数量。
 
 ### ♊ Gemini 原生 API 格式
 
@@ -181,7 +180,6 @@ services:
 
 - `GET /v1/models`：列出模型。
 - `POST /v1/messages`：聊天消息补全，支持非流式、真流式和假流式。
-- `POST /v1/messages/count_tokens`：计算消息中的 token 数量。
 
 > 📖 详细的 API 使用示例请参阅：[API 使用示例文档](docs/zh/api-examples.md)
 
