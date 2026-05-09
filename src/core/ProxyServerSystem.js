@@ -17,6 +17,7 @@ const RequestHandler = require("./RequestHandler");
 const SessionRegistry = require("./SessionRegistry");
 const ConfigLoader = require("../utils/ConfigLoader");
 const WebRoutes = require("../routes/WebRoutes");
+const ProxyControlService = require("./ProxyControlService");
 
 class ProxyServerSystem extends EventEmitter {
     constructor() {
@@ -32,6 +33,8 @@ class ProxyServerSystem extends EventEmitter {
 
         this.sessionRegistry = new SessionRegistry(this.logger, this.config);
         this.requestHandler = new RequestHandler(this, this.sessionRegistry, this.logger, this.config);
+
+        this.controlService = new ProxyControlService(this, this.logger);
 
         this.httpServer = null;
         this.wsServer = new WebSocket.Server({ noServer: true });
@@ -49,6 +52,8 @@ class ProxyServerSystem extends EventEmitter {
     async start() {
         this.logger.info("[System] Starting protocol adapter server...");
         await this._startHttpServer();
+
+        this.controlService.start();
 
         this.staleQueueCleanupInterval = setInterval(() => {
             try {
@@ -366,6 +371,8 @@ class ProxyServerSystem extends EventEmitter {
 
     async shutdown() {
         this.logger.info("[System] Shutting down server system...");
+
+        this.controlService.stop();
 
         if (this.staleQueueCleanupInterval) {
             clearInterval(this.staleQueueCleanupInterval);
