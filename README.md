@@ -22,7 +22,7 @@
 1. 克隆仓库并安装依赖：
 
    ```bash
-   git clone https://github.com/iBUHub/CanvasToAPI.git
+   git clone https://github.com/xxyyht-design/CanvasToAPI.git
    cd CanvasToAPI
    npm install
    ```

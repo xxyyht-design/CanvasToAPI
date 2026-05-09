@@ -13,6 +13,7 @@ A tool that exposes a Gemini web session as OpenAI API, Gemini API, and Anthropi
 - 🔁 **Multi-Session Scheduling**: Supports multiple connected browser sessions with round-robin or random selection
 - 🔧 **Tool Calls Support**: OpenAI, Gemini, and Anthropic endpoints support Tool Calls (Function Calling)
 - 📊 **Visual Console**: Includes status, logs, and runtime switches for easier operations
+- 🛡️ **Active Guardian System (Custom)**: Built-in `ProxyControlService` for automated health checks and browser session auto-launch.
 
 ## 🚀 Quick Start
 
@@ -21,7 +22,7 @@ A tool that exposes a Gemini web session as OpenAI API, Gemini API, and Anthropi
 1. Clone the repository and install dependencies:
 
    ```bash
-   git clone https://github.com/iBUHub/CanvasToAPI.git
+   git clone https://github.com/xxyyht-design/CanvasToAPI.git
    cd CanvasToAPI
    npm install
    ```
@@ -215,6 +216,13 @@ If you need to access the service through a domain name or put it behind a rever
 | `FORCE_THINKING`    | Force-enable thinking mode for all requests.                                                                                                      | `false` |
 | `FORCE_WEB_SEARCH`  | Force-enable web search for all requests. Based on current testing, enabling it may cause request errors.                                         | `false` |
 | `FORCE_URL_CONTEXT` | Force-enable URL context for all requests.                                                                                                        | `false` |
+
+#### 🛡️ Guardian System Configuration (Custom Extension)
+
+| Variable              | Description                                                                 | Default |
+| :-------------------- | :-------------------------------------------------------------------------- | :------ |
+| `AUTO_LAUNCH_BROWSER` | Whether to auto-launch a browser when no active sessions are detected.      | `false` |
+| `BROWSER_PATH`        | Path to the browser executable (optional). Uses system default if empty.    | None    |
 
 ### 🔌 Browser Session Connection
 
