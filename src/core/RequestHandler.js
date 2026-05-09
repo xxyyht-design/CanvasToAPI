@@ -491,6 +491,11 @@ class RequestHandler {
         proxyRequest.is_generative = isGenerativeRequest;
         this._initializeProxyRequestAttempt(proxyRequest);
 
+        // Ensure streaming mode is consistent
+        if (req.path.includes("streamGenerateContent")) {
+            proxyRequest.streaming_mode = proxyRequest.streaming_mode || this.serverSystem.streamingMode || "fake";
+        }
+
         const wantsStream = req.path.includes(":streamGenerateContent");
         res.__proxyResponseStreamMode = wantsStream ? proxyRequest.streaming_mode : null;
 
