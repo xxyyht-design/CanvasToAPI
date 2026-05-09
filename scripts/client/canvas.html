@@ -30,6 +30,13 @@
         .log-entry:hover {
             background: rgba(15, 23, 42, 0.35);
         }
+        #auto-connect-indicator {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            pointer-events: none;
+            z-index: 9999;
+        }
         body.theme-light {
             color-scheme: light;
             background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
@@ -282,6 +289,15 @@
             <div class="initial-log text-slate-500 italic" data-i18n="initialLog">Initializing system... awaiting connection input.</div>
         </div>
     </main>
+    <div id="auto-connect-indicator" class="opacity-0 transition-opacity duration-500">
+        <div class="flex items-center gap-2 rounded-full bg-slate-900/80 px-3 py-1.5 border border-slate-700 shadow-xl backdrop-blur-md">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">Auto Connecting...</span>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -1488,6 +1504,23 @@
 
     window.onload = () => {
         Logger.info(`Client ready. Active browser identifier: ${currentClientLabel}`);
+        
+        // Auto-connect logic
+        if (currentApiKey && currentEndpoint) {
+            const indicator = document.getElementById("auto-connect-indicator");
+            if (indicator) indicator.classList.remove("opacity-0");
+            
+            Logger.info("Auto-connect triggered. Initializing proxy system...");
+            proxySystem.initialize()
+                .then(() => {
+                    Logger.info("Auto-connect successful.");
+                    if (indicator) indicator.classList.add("opacity-0");
+                })
+                .catch(err => {
+                    Logger.error(`Auto-connect failed: ${err.message}`);
+                    if (indicator) indicator.classList.add("opacity-0");
+                });
+        }
     };
 </script>
 </body>
