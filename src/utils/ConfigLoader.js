@@ -125,6 +125,25 @@ class ConfigLoader {
                 this.logger.warn("[System] models.json not found, using default model list.");
                 config.modelList = [{ name: "models/gemini-2.5-flash" }];
             }
+
+            // [Wanqing Hack] Force add Gemini 3.5 Flash if not present
+            if (!config.modelList.some(m => m.name === "models/gemini-3.5-flash")) {
+                this.logger.info("[Wanqing] Injecting Gemini 3.5 Flash support...");
+                config.modelList.unshift({
+                    name: "models/gemini-3.5-flash",
+                    displayName: "Gemini 3.5 Flash",
+                    description: "Next generation Gemini 3.5 Flash model",
+                    inputTokenLimit: 1048576,
+                    outputTokenLimit: 81920,
+                    supportedGenerationMethods: ["generateContent", "countTokens", "createCachedContent", "batchGenerateContent"],
+                    temperature: 1,
+                    maxTemperature: 2,
+                    topP: 0.95,
+                    topK: 64,
+                    version: "3.5-flash",
+                    thinking: true
+                });
+            }
         } catch (error) {
             this.logger.error(
                 `[System] Failed to read or parse models.json: ${error.message}, using default model list.`
