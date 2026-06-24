@@ -4,12 +4,12 @@
 
 中文文档 | [English](README_EN.md)
 
-一个将 Gemini 网页会话封装为兼容 OpenAI API、Gemini API 和 Anthropic API 的工具。服务端负责提供 API 接口和请求调度，实际浏览器会话需要由用户手动打开指定 Gemini 分享页，与服务端建立连接后才能处理请求。
+一个将 Gemini 网页会话封装为兼容 OpenAI API、Gemini API 和 Anthropic API 的工具。
 
 ## ✨ 功能特性
 
 - 🔄 **API 兼容性**：同时兼容 OpenAI API、Gemini API 和 Anthropic API 格式
-- 🌐 **模型支持**：支持 Gemini 3 Flash Preview，几乎无上限调用
+- 🌐 **模型支持**：支持 Gemini 3.5 Flash, Gemini 3 Flash Preview, Gemini 2.5 Flash, Imagen 4 等
 - 🔁 **多会话调度**：支持多个浏览器会话同时连接，按轮询或随机策略分配请求
 - 🔧 **支持工具调用**：OpenAI、Gemini 和 Anthropic 接口均支持 Tool Calls (Function Calling)
 - 📊 **可视化控制台**：提供状态页、日志页和在线配置开关，方便观察服务运行状态
@@ -21,7 +21,7 @@
 1. 克隆仓库并安装依赖：
 
    ```bash
-   git clone https://github.com/iBUHub/CanvasToAPI.git
+   git clone https://github.com/xxyyht-design/CanvasToAPI.git
    cd CanvasToAPI
    npm install
    ```
